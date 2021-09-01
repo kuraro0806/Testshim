@@ -1,0 +1,5 @@
+#include "/home/m_inokawa/workspace/for_compile/insertMacro20200109/include/ccuse.h"
+#include "/home/m_inokawa/workspace/for_compile/insertMacro20200109/include/setaffi.h"
+#include "/home/m_inokawa/workspace/for_compile/insertMacro20200109/include/cache_util.h"
+#include "/home/m_inokawa/workspace/for_compile/insertMacro20200109/include/pmu_util.h"
+#define MYITERATION 100

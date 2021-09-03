@@ -60,10 +60,10 @@
 
 挿入する手順は以下の通りです。
 
+  1. [**run.sh**を動かす](#runshを動かす)
+  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacroc_src-内に-c_src_macro-というディレクトリができているのを確認する)
+  3. [*c_src_Macro* 内のプログラムをクロスコンパイルする](#c_src_macro-内のプログラムをクロスコンパイルする)
 
-  1. [*run.sh* を動かす](#run.shを動かす)
-  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacroc_src内にc_src_macroというディレクトリができているのを確認する)
-  3. [*c_src_Macro* 内のプログラムをクロスコンパイルする](#c_src_macro内のプログラムをクロスコンパイルする)
 
 #### **run.sh**を動かす
 

@@ -127,13 +127,27 @@ L1access,71261
 L1missrate,0.000943
 L2missrate,0.367183
 ```
+<br>
 
 ##### 各カラムの説明
 
-それぞれ *Iteration* 回、L1I/L1D/L2DについてRefill回数とAccess回数を取得している。
-PMUを用いて上記のイベントの回数を取得している。Total、Start、End、lapは以下のように表される。
+それぞれ *Iteration* 回、*L1I/L1D/L2D* について *Refill* 回数と *Access* 回数を取得している。
+*PMU* を用いて上記のイベントの回数を取得している。*Total、Start、End、lap* は以下のように表される。
 
+|カラムの名前|説明|
+|---|---|
 |Start|計測プログラムを始めるときのイベントカウンタの数|
 |End|計測プログラムが終わるときのイベントカウンタの数|
-|lap|lap = End - Start|
-|Total|\sum lap|
+|lap|$lap = End - Start$|
+|Total|Total = $\sum lap$|
+
+最後に出力されるパラメータは下記の通りである。
+
+|パラメータ名|パラメータの説明|
+|---|---|
+|TotalTime|*Iteration*回実行した実行サイクルの和|
+|Iteration|マクロで定義したプログラムを実行する回数|
+|exec count|実行サイクルの平均回数 (*TotalTime / Iteration*)|
+|L1access|L1アクセス回数の平均回数|
+|L1missrate|L1キャッシュミス率 (*L1-Rifill / L1-Access*)|
+|L2missrate|L2キャッシュミス率 (*L2-Refill / L2-Access*)|

@@ -5,9 +5,9 @@
   - [実行のための準備](#実行のための準備)
     - [準備](#準備)
     - [実行サイクル取得用のマクロを挿入する](#実行サイクル取得用のマクロを挿入する)
-      - [1. `run.sh`を動かす](#1-runshを動かす)
-      - [2. `insertMacro/c_src`内に`c_src_Macro`というディレクトリができているのを確認する](#2-insertmacroc_src内にc_src_macroというディレクトリができているのを確認する)
-      - [3. `c_src_Macro`内のプログラムをクロスコンパイルする](#3-c_src_macro内のプログラムをクロスコンパイルする)
+      - [1. **run.sh**を動かす](#1-runshを動かす)
+      - [2. *insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#2-insertmacroc_src-内に-c_src_macro-というディレクトリができているのを確認する)
+      - [3. *c_src_Macro* 内のプログラムをクロスコンパイルする](#3-c_src_macro-内のプログラムをクロスコンパイルする)
   - [実機で実行し、実行サイクルを取得する](#実機で実行し実行サイクルを取得する)
     - [注意点](#注意点)
       - [1.PMUの起動](#1pmuの起動)
@@ -28,13 +28,13 @@
 以下のプラットフォームでの実行を確認しています。
 
 + 環境
-  + Ubuntu ver.16.04LTS
+  + *Ubuntu ver.16.04LTS*
 <br>
 
 + ターゲットハードウェア
-  + Raspberry Pi3 Model B+
-    + CPU：Cortex-A53
-    + OS：Linux ver4.14.68
+  + *Raspberry Pi3 Model B+*
+    + *CPU*：*Cortex-A53*
+    + *OS*：*Linux ver4.14.68*
 
 ## 実行のための準備
 
@@ -44,35 +44,35 @@
 
 実行するには以下のツールが必要です。
 
-+ Pythonの実行環境
++ *Python* の実行環境
 + ターゲットのハードウェア向けにクロスコンパイルする環境
-    + 製作者はコンパイラにaarch64 poky linuxを使用
+    + 製作者はコンパイラに *aarch64-poky-linux* を使用
 
 
 準備するファイルは以下の通りです。
 
-+ [c_src](../all_c_src/)の計測プログラム
-    + c_srcをinsertMacro内に配置する
++ [*c_src*](../c_src/)の計測プログラム
+    + *c_src* ごと *insertMacro* 内に配置する
 
 ### 実行サイクル取得用のマクロを挿入する
 
 挿入する手順は以下の通りです。
 
 
-  1. [run.shを動かす](#1-runshを動かす)
-  2. [insertMacro/c_src内にc_src_Macroというディレクトリができているのを確認する](#2-insertmacroc_src内にc_src_macroというディレクトリができているのを確認する)
-  3. [c_src_Macroのプログラムをクロスコンパイルする](#3-c_src_macro内のプログラムをクロスコンパイルする)
+  1. [*run.sh* を動かす](#1-runshを動かす)
+  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#2-insertmacroc_src内にc_src_macroというディレクトリができているのを確認する)
+  3. [*c_src_Macro* 内のプログラムをクロスコンパイルする](#3-c_src_macro内のプログラムをクロスコンパイルする)
 
-#### 1. `run.sh`を動かす
+#### 1. **run.sh**を動かす
 
 動かし方は以下の通りです。
 `sudo ./run.sh c_src/*`
 
-#### 2. `insertMacro/c_src`内に`c_src_Macro`というディレクトリができているのを確認する
+#### 2. *insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する
 
-`c_src`内に`c_src_Macro`ができていて、そのディレクトリの中にマクロが挿入された計測プログラムがあるのを確認してください。
+*c_src* 内に *c_src_Macro* ができていて、そのディレクトリの中にマクロが挿入された計測プログラムがあるのを確認してください。
 
-#### 3. `c_src_Macro`内のプログラムをクロスコンパイルする
+#### 3. *c_src_Macro* 内のプログラムをクロスコンパイルする
 
 ターゲットのハードウェアで実行できるようにクロスコンパイルしてください。
 
@@ -89,19 +89,19 @@
 
 #### 1.PMUの起動
 
-[PMU_module](PMU_module)内の3種類のカーネルモジュール(**.ko)を以下のコマンドでロードしてください。
+[*PMU_module*](PMU_module) 内の3種類のカーネルモジュール(***.ko*)を以下のコマンドでロードしてください。
 
 `insmod (カーネルモジュール)`
 
 #### 2.動作周波数の固定
 
-[PMU_module](PMU_module)内の`cpusetup.sh`を以下のコマンドで動かしてください。
+[*PMU_module*](PMU_module) 内の**cpusetup.sh**を以下のコマンドで動かしてください。
 
 `./cpusetup3.sh`
 
 #### 3.結果の出力方法
 
 実行結果は、以下の例のようにcsvファイルに出力してください。
-(BubbleSortは`BubbleSort.c`をコンパイルしたファイル)
+(*BubbleSort* は**BubbleSort.c**をコンパイルしたファイル)
 
 `./BubbleSort > res_BubbleSort.csv`

@@ -1,28 +1,26 @@
-# SHIMの遅延値計測、挿入
+# SHIM Latency Measurement and Insertion
 
 - [SHIMの遅延値計測、挿入](#shimの遅延値計測挿入)
   - [はじめに](#はじめに)
   - [遅延値計測](#遅延値計測)
   - [遅延値挿入](#遅延値挿入)
 
-## はじめに
+## Description
 
-本ディレクトリ *openshim* では、ハードウェア抽象化である *SHIM* の遅延値(*latency*)を取り扱うための機能を提供します。
+This directory provides functions to handle SHIM latency.
+SHIM is a hardware abstraction.
 
-以下の手順で作業を行ってください。
+Follow the steps below to complete the process.
 
+ 1. [Latency Measurement](#Latency Measurement)
+ 2. [Latency Insertion](#Latency Insertion)
 
- 1. [遅延値計測](#遅延値計測)
- 2. [遅延値挿入](#遅延値挿入)
+## Latency Measurement
 
-## 遅延値計測
+Execute the measurement programs on the actual machine and output the execution cycles and memory access count.
+This feature is available in the [*measure*](./mesure) directory.
 
-実機で計測プログラムを実行して実行サイクル等を出力します。
+## Latency Insertion
 
-[*measure*](./measure) ディレクトリにて提供しています。
-
-## 遅延値挿入
-
-先の工程で得たサイクル数を用いて遅延値を計算します。
-
-[*latency*](./latency)ディレクトリにて提供しています。
+Calculate the latency using the execution cycles obtained in the previous step.
+This feature is available in the [*latency*](./latency) directory.

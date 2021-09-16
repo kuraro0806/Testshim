@@ -12,8 +12,8 @@ SHIM is a hardware abstraction.
 
 Follow the steps below to complete the process.
 
- 1. [Latency Measurement](#Latency Measurement)
- 2. [Latency Insertion](#Latency Insertion)
+ 1. [Latency Measurement](#Latency-Measurement)
+ 2. [Latency Insertion](#Latency-Insertion)
 
 ## Latency Measurement
 

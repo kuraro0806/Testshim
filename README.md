@@ -1,9 +1,9 @@
 # SHIM Latency Measurement and Insertion
 
-- [SHIMの遅延値計測、挿入](#shimの遅延値計測挿入)
-  - [はじめに](#はじめに)
-  - [遅延値計測](#遅延値計測)
-  - [遅延値挿入](#遅延値挿入)
+- [SHIM Latency Measurement and Insertion](#shim-latency-measurement-and-insertion)
+  - [Description](#description)
+  - [Latency Measurement](#latency-measurement)
+  - [Latency Insertion](#latency-insertion)
 
 ## Description
 

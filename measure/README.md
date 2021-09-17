@@ -81,7 +81,7 @@ The procedure to insert is as follows:
 
 #### Run **run.sh**
 
-The command to run is as follows.
+The command to run is as follows:
 
 `sudo ./run.sh c_src/*`
 

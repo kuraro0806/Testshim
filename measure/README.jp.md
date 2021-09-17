@@ -12,80 +12,80 @@
 
 </script>
 
-# Measure Execution Cycles 
-- [Measure Execution Cycles](#measure-execution-cycles)
-  - [Description](#description)
-    - [Execution Environment](#execution-environment)
-  - [Preparation](#preparation)
-    - [Tools](#tools)
-    - [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
-      - [Run **run.sh**](#run-runsh)
-      - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-c_src_macro-directory-is-created-in-insertmacroc_src)
+# 実機計測
+- [実機計測](#実機計測)
+  - [はじめに](#はじめに)
+    - [実行環境](#実行環境)
+  - [実行のための準備](#実行のための準備)
+    - [準備](#準備)
+    - [実行サイクル取得用のマクロを挿入する](#実行サイクル取得用のマクロを挿入する)
+      - [**run.sh**を動かす](#runshを動かす)
+      - [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacroc_src-内に-c_src_macro-というディレクトリができているのを確認する)
       - [*c_src_Macro* 内のプログラムをクロスコンパイルする](#c_src_macro-内のプログラムをクロスコンパイルする)
-  - [Run programs on a actual device and get execution cycle](#run-programs-on-a-actual-device-and-get-execution-cycle)
+  - [実機で実行し、実行サイクルを取得する](#実機で実行し実行サイクルを取得する)
     - [注意点](#注意点)
       - [PMUの起動](#pmuの起動)
       - [動作周波数の固定](#動作周波数の固定)
       - [結果の出力方法](#結果の出力方法)
         - [各カラムの説明](#各カラムの説明)
 
-## Description
+## はじめに
 
-This directory provides functions to cross-compile the measurement program for the actual device and acquire the execution cycles.
+本ディレクトリ *measure* では計測プログラムを実機用にクロスコンパイルし、実行サイクルを取得する機能を提供します。
+具体的には以下の通りです。
 
-The procedure is as follows.
++ [実行サイクル取得用のマクロを挿入する](#実行サイクル取得用のマクロを挿入する)
++ 実機で実行するためにクロスコンパイル
++ [実機で実行し、実行サイクルを取得する](#実機で実行し実行サイクルを取得する)
 
-+ [Insert macros to get execution cycle](#Insert-macros-to-get-execution-cycle)
-+ Cross-compile to run on a actual device
-+ [Run programs on a actual device and get execution cycle](#Run-programs-on-a-actual-device-and-get-execution-cycle)
+### 実行環境
 
-### Execution Environment
+以下のプラットフォームでの実行を確認しています。
 
-We have confirmed that the programs runs on the following platform.
-
-+ Environment
++ 環境
   + *Ubuntu ver.16.04LTS*
 <br>
 
-+ Target Hardware
++ ターゲットハードウェア
   + *Raspberry Pi3 Model B+*
     + *CPU*：*Cortex-A53*
     + *OS*：*Linux ver4.14.68*
 
-## Preparation
+## 実行のための準備
 
-This section describes the flow of inserting a macro into the measurement programs for execution.
+実行のために計測プログラムにマクロを挿入する流れを説明します。
 
-### Tools
+### 準備
 
-You will need the following tools:
+実行するには以下のツールが必要です。
 
-+ Execution environment of *Python*
-  + We have confirmed executing *ver 2.7.12*  
-+ Environment to cross-compile for the target hardware
-  + We used *aarch64-poky-linux* compiler
-
-The files to be prepared are as follows:
-
-+ The mesurement programs: [*c_src*](../c_src/)
-    + Place *c_src* directory in *insertMacro*
-
-### Insert macros to get execution cycle
-
-The procedure to insert is as follows:
-
-  1. [Run **run.sh**](#Run-runsh)
-  2. [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#[Make-sure-that-*c_src_Macro*-directory-is-created-in-*insertMacro/c_src*)
-  3. [Cross-compile the programs in *c_src_Macro*](#Cross-compile-the-programs-in-*c_src_Macro*)
++ *Python* の実行環境
+  + *ver 2.7.12* での実行を確認
++ ターゲットのハードウェア向けにクロスコンパイルする環境
+  + 製作者はコンパイラに *aarch64-poky-linux* を使用
 
 
-#### Run **run.sh**
+準備するファイルは以下の通りです。
 
-The command to run is as follows.
++ [*c_src*](../c_src/)の計測プログラム
+    + *c_src* ごと *insertMacro* 内に配置する
+
+### 実行サイクル取得用のマクロを挿入する
+
+挿入する手順は以下の通りです。
+
+  1. [**run.sh**を動かす](#runshを動かす)
+  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacroc_src-内に-c_src_macro-というディレクトリができているのを確認する)
+  3. [*c_src_Macro* 内のプログラムをクロスコンパイルする](#c_src_macro-内のプログラムをクロスコンパイルする)
+
+
+#### **run.sh**を動かす
+
+動かし方は以下の通りです。
 
 `sudo ./run.sh c_src/*`
 
-#### Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*
+#### *insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する
 
 *c_src* 内に *c_src_Macro* ができていて、そのディレクトリの中にマクロが挿入された計測プログラムがあるのを確認してください。
 
@@ -95,7 +95,7 @@ The command to run is as follows.
 
 ターゲットのハードウェアで実行できるようにクロスコンパイルしてください。
 
-## Run programs on a actual device and get execution cycle
+## 実機で実行し、実行サイクルを取得する
 
 コンパイルした実行ファイルをUSBメモリ等でターゲットハードウェアに移し、実行してください。
 

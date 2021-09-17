@@ -18,9 +18,9 @@ Follow the steps below to complete the process.
 ## Latency Measurement
 
 Execute the measurement programs on the actual machine and output the execution cycles and memory access count.
-This feature is available in the [*measure*](./mesure) directory.
+This function is available in the [*measure*](./mesure) directory.
 
 ## Latency Insertion
 
 Calculate the latency using the execution cycles obtained in the previous step.
-This feature is available in the [*latency*](./latency) directory.
+This function is available in the [*latency*](./latency) directory.

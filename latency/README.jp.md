@@ -1,6 +1,6 @@
-# Latency calculation
+# レイテンシ算出
 
-[Latency calculation](#Latency calculation)
+[レイテンシ算出](#レイテンシ算出)
   - [はじめに](#はじめに)
   - [レイテンシ算出への準備](#レイテンシ算出への準備)
     - [準備](#準備)
@@ -17,81 +17,77 @@
       - [そのファイルを*csv*形式で保存](#そのファイルをcsv形式で保存)
       - [レイテンシ挿入ツールの規則に沿うように変換](#レイテンシ挿入ツールの規則に沿うように変換)
 
-## Description
+## はじめに
 
-This directory provides latency calculation based on the files obtained from the actual device measurement.
+本ディレクトリ *latency* では実機計測で得たファイルを基にレイテンシの算出を提供します。
 
-## Preparation for latency calculation
-### Preparation
+## レイテンシ算出への準備
+### 準備
 
-The following tools are required to run the programs.
+実行には以下のツールが必要です。
 
-+ Environment in which macros can be executed in *xlsx*，*xlsm* file
 + *xlsx*，*xlsm* ファイルでマクロが実行できる環境
-  + Confirm execution in *Excel Office 2019*
+  + *Excel Office 2019* での実行を確認
 
-The file to prepare are as follows:
+準備するファイルは以下の通りです。
 
-+ *csv* files obtained by [mesure](../mesure).
++ [実機計測](../実機計測)で得た *csv* ファイル
 
-### Exclude outliers
+### 外れ値を除外する
 
-Exclude outliers from the results obtained from the actual measurement. 
-The procedure is as follows:
+実機計測で得た結果から外れ値を除外します。手順は以下の通りです。
 
-#### Place *csv* files
+#### *csv* ファイルを配置する
 
-Place all the files obtained from the actual measurement in [*ExcludeValues*](/ExcludeValues).
+実機計測で得たすべてのファイルを [*ExcludeValues*](/ExcludeValues) 内に配置してください。
 
-#### Import into **ExcludeValues.xlsm** 
+#### **ExcludeValues.xlsm** に取り込む
 
-1. Open [**ExcludeValues.xlsm**](/ExcludeValues/ExcludeValues.xlsm) 
-2. Excute 「Repeating_CSV」 by 「View」→「Macro」
-3. Make sure all csv files have been added as new sheets
+1. [**ExcludeValues.xlsm**](/ExcludeValues/ExcludeValues.xlsm) を開く
+2. 「表示」→「マクロ」の「Reading_CSV」を実行する
+3. すべての *csv* ファイルが新しいシートとして追加されたのを確認する
 
 ![csvファイルを取り込んだときの画面](../images/csv.bmp)
 
-#### Exclusion of outliers
+#### 外れ値の除外
 
-1. Run the macro 「Run_median_macro」 as well.
-2. Set tolerances.
-   + Set a percentage between 0 and 1, such as 0.2 or 0.1
-   + If you are not particular about the range, set both items to 0.1
-3. Comfirm that the excluded results are printed on *sheet1*.
+1. 同じくマクロの「すべてのシートで中央値のマクロを実行」を実行する
+2. 許容範囲の設定を行う
+   + 0.2や0.1など0以上1以下の割合を設定する
+   + 特に範囲にこだわりがなければ2項目とも0.1に設定する
+3. *sheet1* に除外された結果が出力されたのを確認する
 
-##### In the case of extremely high outliers
+##### 外れ値が極端に多かった場合
 
-There may be many extreme outliers due to uniformly set tolerances.
-In that case, if you manually rewrite the 「upper」 and 「lower」 limits of the *L1Access/Refill* count in the sheet of each imported *csv* file, the calculation will be recalculated and reflected.
+一律に許容範囲を設定するせいで極端に外れ値が多くなる場合がある。
+そのときは取り込んだ各 *csv* ファイルのシート内の *L1Access/Refill* 回数の「上限」、「下限」を手動で書き換えれば計算し直して反映してくれる。
 
-### Procedure for latency calculation
+### レイテンシ算出の手順
 
-[**calc.xlsm**](/calc.xlsm) is used to calculate the latency. 
-The procedure is as follows:
+[**calc.xlsm**](/calc.xlsm) を用いてレイテンシの算出を行います。手順は以下の通りです。
 
 1. [必要事項をまとめシートに埋める](#必要事項をまとめシートに埋める)
 2. [回帰分析でレイテンシ算出](#回帰分析でレイテンシ算出)
 
-#### Fill out *summary* sheet with the required information
+#### 必要事項をまとめシートに埋める
 
-Enter the necessary information on the summary sheet in [**calc.xlsm**](/calc.xlsm) .
-The items to be entered are as follows:
+[**calc.xlsm**](/calc.xlsm) のまとめシートに必要事項を入力します。入力する事項は以下の通りです。
 
-+ Value of *sheet1* of **ExcludeValues.xlsm**
-  + Enter *TotalCycle* into *TotalCycle* on [**calc.xlsm**](/calc.xlsm) summary sheet and regression analysis sheet
-  + Enter the new miss rate into the *L1* miss rate on the summary sheet.
-  + Enter the new average value of *L1-D-Access* into *L1* Access
-+ Value of *summary* sheet of [**calc.xlsm**](/calc.xlsm)
-  + Enter the MemoryRead into *MemRead* in *regression* sheet
-  + Enter the MemoryWrite into *MemWrite* in *regression* sheet
-  + Enter *L1* accesses into *CacheAccess* on the *regression* sheet
++ **ExcludeValues.xlsm** の *sheet1* の値
+  + *TotalCycle* を [**calc.xlsm**](/calc.xlsm) のまとめシートと回帰分析シートの *TotalCycle* に入力
+  + 新しいミス率をまとめシートの *L1* ミス率に入力
+  + *L1-D-Access* の新しい平均値を *L1* アクセスに入力
++ [**calc.xlsm**](/calc.xlsm) のまとめシートの値
+  + メモリ読込を回帰分析シートの *MemRead* に入力
+  + メモリ書込を回帰分析シートの *MemWrite* に入力
+  + *L1* アクセスを回帰分析シートの *CacheAccess* に入力
 
-※ The orange cells on both sheets should be fully filled.
+※ 2シートともオレンジ色のセルが埋まり切ればよい。
 
-#### Latency calculation by regression analysis
+#### 回帰分析でレイテンシ算出
 
-In the regression analysis sheet, calculate the latency of each variable using the solver function.
-In this file, the latency is calculated by the least-squares method for the actual machine execution cycle and the estimation cycle.
+回帰分析シートにて、ソルバー機能を用いて各変数のレイテンシを求めます。
+本ファイルでは実機実行サイクルと見積りサイクルの最小二乗法でレイテンシを算出します。
 
 回帰分析は「データ」→「ソルバー」を選択し、各パラメータを以下のように設定して行います。
 

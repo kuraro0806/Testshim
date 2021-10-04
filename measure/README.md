@@ -106,12 +106,12 @@ Move **cpusetup.sh** in [*PMU_module*](PMU_module) with the following command.
 
 #### How to output the results
 
-Please output the execution result to csv file as shown in the following example.
+Please output the execution result to *csv* file as shown in the following example.
 (*BubbleSort* is file compiled from **BubbleSort.c**.)
 
 `./BubbleSort > res_BubbleSort.csv`
 
-Make sure that the csv file outputs the following results.
+Make sure that the *csv* file outputs the following results.
 
 ```bash
 L1I-Refill,,,,L1D-Refil,,,,L1D-Access,,,,L1I-Access,,,,L2D-Access,,,,L2D-Refill,,,,

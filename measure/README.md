@@ -21,13 +21,13 @@
     - [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
       - [Run **run.sh**](#run-runsh)
       - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-c_src_macro-directory-is-created-in-insertmacroc_src)
-      - [*c_src_Macro* 内のプログラムをクロスコンパイルする](#c_src_macro-内のプログラムをクロスコンパイルする)
+      - [Cross-compile the programs in *c_src_Macro*.](#cross-compile-the-programs-in-c_src_macro)
   - [Run programs on a actual device and get execution cycle](#run-programs-on-a-actual-device-and-get-execution-cycle)
-    - [注意点](#注意点)
-      - [PMUの起動](#pmuの起動)
-      - [動作周波数の固定](#動作周波数の固定)
-      - [結果の出力方法](#結果の出力方法)
-        - [各カラムの説明](#各カラムの説明)
+    - [Note](#note)
+      - [Startup *PMU*](#startup-pmu)
+      - [Fix operating frequency](#fix-operating-frequency)
+      - [How to output the results](#how-to-output-the-results)
+        - [Explanation of each column](#explanation-of-each-column)
 
 ## Description
 
@@ -87,45 +87,45 @@ The command to run is as follows:
 
 #### Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*
 
-*c_src* 内に *c_src_Macro* ができていて、そのディレクトリの中にマクロが挿入された計測プログラムがあるのを確認してください。
+Make sure that *c_src_Macro* is created in *c_src*, and that there is a measurement programs in that directory with the macro inserted.
 
-※ **GaussianElimination.c**に*return*文が複数あるせいでマクロ挿入が上手くいきません。97行目から122行目のマクロを削除することで解決します。
+※ The insertion of the macro does not work because there is more than one *return* in **GaussianElimination.c**. Deleting the macro in lines 97 to 122 will solve the problem.
 
-#### *c_src_Macro* 内のプログラムをクロスコンパイルする
+#### Cross-compile the programs in *c_src_Macro*. 
 
-ターゲットのハードウェアで実行できるようにクロスコンパイルしてください。
+Cross-compile the programs so that it can run on the target hardware.
 
 ## Run programs on a actual device and get execution cycle
 
-コンパイルした実行ファイルをUSBメモリ等でターゲットハードウェアに移し、実行してください。
+Move the compiled executable files to the target hardware via USB memory, and execute them.
 
-### 注意点
-以下の3点に注意して実行してください。
+### Note
+Please pay attention to the following three points when doing this.
 
-1. [*PMU* の起動](#PMUの起動)
-2. [動作周波数の固定](#動作周波数の固定)
-3. [結果の出力方法](#結果の出力方法)
+1. [Startup *PMU*](#Startup-PMU)
+2. [Fix operating frequency](#Fix-operating-frequency)
+3. [How to output the results](#How-to-output-the-results)
 
-#### PMUの起動
+#### Startup *PMU*
 
-[*PMU_module*](PMU_module) 内の3種類のカーネルモジュール(***.ko*)を以下のコマンドでロードしてください。
+Load the three kernel modules(***.ko*) in [*PMU_module*](PMU_module) with the following command.
 
-`insmod (カーネルモジュール)`
+`insmod (kernel module)`
 
-#### 動作周波数の固定
+#### Fix operating frequency
 
-[*PMU_module*](PMU_module) 内の**cpusetup.sh**を以下のコマンドで動かしてください。
+Move **cpusetup.sh** in [*PMU_module*](PMU_module) with the following command.
 
 `./cpusetup3.sh`
 
-#### 結果の出力方法
+#### How to output the results
 
-実行結果は、以下の例のようにcsvファイルに出力してください。
-(*BubbleSort* は**BubbleSort.c**をコンパイルしたファイル)
+Please output the execution result to csv file as shown in the following example.
+(*BubbleSort* is file compiled from **BubbleSort.c**.)
 
 `./BubbleSort > res_BubbleSort.csv`
 
-csvファイルには以下のような結果が出力されていることを確認してください。
+Make sure that the csv file outputs the following results.
 
 ```bash
 L1I-Refill,,,,L1D-Refil,,,,L1D-Access,,,,L1I-Access,,,,L2D-Access,,,,L2D-Refill,,,,
@@ -140,31 +140,31 @@ Total,Start,End,lap,Total,Start,End,lap,Total,Start,End,lap,Total,Start,End,lap,
 -----------------------
 TotalTime,22501440,Iteration,100
 exec count,225014
-L1access,71261
+L1access,71261s
 L1missrate,0.000943
 L2missrate,0.367183
 ```
 <br>
 
-##### 各カラムの説明
+##### Explanation of each column
 
-それぞれ *Iteration* 回、*L1I/L1D/L2D* について *Refill* 回数と *Access* 回数を取得している。
-*PMU* を用いて上記のイベントの回数を取得している。*Total、Start、End、lap* は以下のように表される。
+They are getting *Refill* and *Access* for *Iteration* and *L1I/L1D/L2D* respectively.
+*PMU* is used to get the number of events above. *Total、Start、End、lap* are expressed as follows.
 
-|カラムの名前|説明|
+|Name of column|Description|
 |---|---|
-|Start|計測プログラムを始めるときのイベントカウンタの数|
-|End|計測プログラムが終わるときのイベントカウンタの数|
+|Start|Number of event counters when starting the measurement program|
+|End|Number of event counters at the end of the measurement program|
 |lap|*lap = End - Start*|
-|Total|*Total = lap*の総和|
+|Total|Sum of *lap*|
 
-最後に出力されるパラメータは下記の通りである。
+The final output parameters are as follows.
 
-|パラメータ名|パラメータの説明|
+|Name of parameters|Description of parameters|
 |---|---|
-|TotalTime|*Iteration*回実行した実行サイクルの和|
-|Iteration|マクロで定義したプログラムを実行する回数|
-|exec count|実行サイクルの平均回数 (*TotalTime / Iteration*)|
-|L1access|L1アクセス回数の平均回数|
-|L1missrate|L1キャッシュミス率 (*L1-Rifill / L1-Access*)|
-|L2missrate|L2キャッシュミス率 (*L2-Refill / L2-Access*)|
+|TotalTime|Sum of the execution cycles executed *Itration* times|
+|Iteration|Number of times to execute the program defined by the macro|
+|exec count|Average number of execution cycles (*TotalTime / Iteration*)|
+|L1access|Average number of L1 accesses|
+|L1missrate|L1 cache miss rate (*L1-Rifill / L1-Access*)|
+|L2missrate|L2 cache miss rate (*L2-Refill / L2-Access*)|

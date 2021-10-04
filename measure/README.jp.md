@@ -148,8 +148,8 @@ L2missrate,0.367183
 
 ##### 各カラムの説明
 
-それぞれ *Iteration* 回、*L1I/L1D/L2D* について *Refill* 回数と *Access* 回数を取得している。
-*PMU* を用いて上記のイベントの回数を取得している。*Total、Start、End、lap* は以下のように表される。
+それぞれ *Iteration* 回、*L1I/L1D/L2D* について *Refill* 回数と *Access* 回数を取得しています。
+*PMU* を用いて上記のイベントの回数を取得しています。*Total、Start、End、lap* は以下のように表されます。
 
 |カラムの名前|説明|
 |---|---|

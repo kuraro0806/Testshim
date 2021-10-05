@@ -75,12 +75,12 @@
 
 + **ExcludeValues.xlsm** の *sheet1* の値
   + *TotalCycle* を [**calc.xlsm**](/calc.xlsm) の*summary*シートと*regression*シートの *TotalCycle* に入力
-  + 新しいミス率を*summary*シートの *L1 missRate*に入力
-  + *L1-D-Access* の新しい平均値を *L1 Access*に入力
+  + *NewMissRate*を*summary*シートの *L1 missRate*に入力
+  + *L1-D-Access* の*New Average*を *L1 Access*に入力
 + [**calc.xlsm**](/calc.xlsm) の*summary*シートの値
   + *MemRead*を*regression*シートの *MemRead* に入力
   + *MemWrite*を*regression*シートの *MemWrite* に入力
-  + *L1* Accessを*regression*シートの *CacheAccess* に入力
+  + *L1 Access*を*regression*シートの *CacheAccess* に入力
 
 ※ 2シートともオレンジ色のセルが埋まり切ればよい。
 

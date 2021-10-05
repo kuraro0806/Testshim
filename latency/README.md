@@ -139,4 +139,4 @@ By executing the following command in the *trans* directory, ã€Œ**output.csv**ã€
 
 `python transcsv.py`
 
-For an example of the output file(**output.csv**), see [**sample.csv**](. /trans/sample.csv).
+For an example of the output file(**output.csv**), see [**sample.csv**](./trans/sample.csv).

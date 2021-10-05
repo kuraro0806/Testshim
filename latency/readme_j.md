@@ -74,7 +74,7 @@
 [**calc.xlsm**](/calc.xlsm) の*summary*シートに必要事項を入力します。入力する事項は以下の通りです。
 
 + **ExcludeValues.xlsm** の *sheet1* の値
-  + *TotalCycle* を [**calc.xlsm**](/calc.xlsm) のまとめシートと回帰分析シートの *TotalCycle* に入力
+  + *TotalCycle* を [**calc.xlsm**](/calc.xlsm) の*summary*シートと*regression*シートの *TotalCycle* に入力
   + 新しいミス率を*summary*シートの *L1 missRate*に入力
   + *L1-D-Access* の新しい平均値を *L1 Access*に入力
 + [**calc.xlsm**](/calc.xlsm) の*summary*シートの値

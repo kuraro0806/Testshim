@@ -27,7 +27,6 @@ This directory provides latency calculation based on the files obtained from the
 The following tools are required to run the programs.
 
 + Environment in which macros can be executed in *xlsx*，*xlsm* file
-+ *xlsx*，*xlsm* ファイルでマクロが実行できる環境
   + Confirm execution in *Excel Office 2019*
 
 The file to prepare are as follows:
@@ -79,12 +78,12 @@ The items to be entered are as follows:
 
 + Value of *sheet1* of **ExcludeValues.xlsm**
   + Enter *TotalCycle* into *TotalCycle* on [**calc.xlsm**](/calc.xlsm) summary sheet and regression analysis sheet
-  + Enter the new miss rate into the *L1* miss rate on the summary sheet.
-  + Enter the new average value of *L1-D-Access* into *L1* Access
+  + Enter the *NewMissRate* into the *L1 missRate* on the summary sheet.
+  + Enter the *New Average* of *L1-D-Access* into *L1 Access*
 + Value of *summary* sheet of [**calc.xlsm**](/calc.xlsm)
-  + Enter the MemoryRead into *MemRead* in *regression* sheet
-  + Enter the MemoryWrite into *MemWrite* in *regression* sheet
-  + Enter *L1* accesses into *CacheAccess* on the *regression* sheet
+  + Enter the *MemRead* into *MemRead* in *regression* sheet
+  + Enter the *MemWrite* into *MemWrite* in *regression* sheet
+  + Enter *L1 access* into *CacheAccess* on the *regression* sheet
 
 ※ The orange cells on both sheets should be fully filled.
 

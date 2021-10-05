@@ -66,21 +66,21 @@
 
 [**calc.xlsm**](/calc.xlsm) を用いてレイテンシの算出を行います。手順は以下の通りです。
 
-1. [必要事項をまとめシートに埋める](#必要事項をまとめシートに埋める)
+1. [必要事項を*summary*シートに埋める](#必要事項を*summary*シートに埋める)
 2. [回帰分析でレイテンシ算出](#回帰分析でレイテンシ算出)
 
 #### 必要事項をまとめシートに埋める
 
-[**calc.xlsm**](/calc.xlsm) のまとめシートに必要事項を入力します。入力する事項は以下の通りです。
+[**calc.xlsm**](/calc.xlsm) の*summary*シートに必要事項を入力します。入力する事項は以下の通りです。
 
 + **ExcludeValues.xlsm** の *sheet1* の値
   + *TotalCycle* を [**calc.xlsm**](/calc.xlsm) のまとめシートと回帰分析シートの *TotalCycle* に入力
-  + 新しいミス率をまとめシートの *L1* ミス率に入力
-  + *L1-D-Access* の新しい平均値を *L1* アクセスに入力
-+ [**calc.xlsm**](/calc.xlsm) のまとめシートの値
-  + メモリ読込を回帰分析シートの *MemRead* に入力
-  + メモリ書込を回帰分析シートの *MemWrite* に入力
-  + *L1* アクセスを回帰分析シートの *CacheAccess* に入力
+  + 新しいミス率を*summary*シートの *L1 missRate*に入力
+  + *L1-D-Access* の新しい平均値を *L1 Access*に入力
++ [**calc.xlsm**](/calc.xlsm) の*summary*シートの値
+  + *MemRead*を*regression*シートの *MemRead* に入力
+  + *MemWrite*を*regression*シートの *MemWrite* に入力
+  + *L1* Accessを*regression*シートの *CacheAccess* に入力
 
 ※ 2シートともオレンジ色のセルが埋まり切ればよい。
 

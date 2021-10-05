@@ -132,8 +132,6 @@ Save the file with 「Save As」. Please note the following three points.
 + Change the file name to 「**input.csv**」
 + Save in [latency/*trans*/*inst*](trans/inst)
 
-![csvファイルとして保存](../images/save.bmp)
-
 #### Convert to follow the rules of the Latency Insertion Tool
 
 Run **transcsv.py** to convert the *csv* file you just created into a form compatible with the Latency Insertion Tool.

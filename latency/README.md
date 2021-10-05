@@ -1,21 +1,21 @@
 # Latency calculation
 
 [Latency calculation](#Latency calculation)
-  - [はじめに](#はじめに)
-  - [レイテンシ算出への準備](#レイテンシ算出への準備)
-    - [準備](#準備)
-    - [外れ値を除外する](#外れ値を除外する)
-      - [*csv*ファイルを配置する](#csv-ファイルを配置する)
-      - [**ExcludeValues.xlsm**に取り込む](#excludevaluesxlsm-に取り込む)
-      - [外れ値の除外](#外れ値の除外)
-        - [外れ値が極端に多かった場合](#外れ値が極端に多かった場合)
-  - [レイテンシ算出の手順](#レイテンシ算出の手順) 
-      - [必要事項をまとめシートに埋める](#必要事項をまとめシートに埋める)
-      - [回帰分析でレイテンシ算出](#回帰分析でレイテンシ算出)
-  - [csvに変換](#csvに変換)
-      - [マクロを実行して*csv*ファイルを生成](#マクロを実行してcsvファイルを生成)
-      - [そのファイルを*csv*形式で保存](#そのファイルをcsv形式で保存)
-      - [レイテンシ挿入ツールの規則に沿うように変換](#レイテンシ挿入ツールの規則に沿うように変換)
+  - [Description](#Description)
+  - [Preparation for latency calculation](#Preparation-for-latency-calculation)
+    - [Preparation](#Preparation)
+    - [Exclude outliers](#Exclude-outliers)
+      - [Place *csv* files](#Place-*csv*-files)
+      - [Import into **ExcludeValues.xlsm** ](#Import-into-**ExcludeValues.xlsm** )
+      - [Exclusion of outliers](#Exclusion-of-outliers)
+        - [In the case of extremely high outliers](#In-the-case-of-extremely-high-outliers)
+  - [Procedure for latency calculation](#Procedure-for-latency-calculation) 
+      - [Fill out *summary* sheet with the required information](#Fill-out-*summary*-sheet-with-the-required-information)
+      - [Latency calculation by regression analysis](#Latency-calculation-by-regression-analysis)
+  - [Convert to *csv*](#Convert-to-*csv*)
+      - [Run the macro to generate a *csv* file](#Run-the-macro-to-generate-a-*csv*-file)
+      - [Save the file in *csv* format](#Save-the-file-in-*csv*-format)
+      - [Convert to follow the rules of the Latency Insertion Tool](#Convert-to-follow-the-rules-of-the-Latency-Insertion-Tool)
 
 ## Description
 
@@ -69,8 +69,8 @@ In that case, if you manually rewrite the 「upper」 and 「lower」 limits of 
 [**calc.xlsm**](/calc.xlsm) is used to calculate the latency. 
 The procedure is as follows:
 
-1. [必要事項をまとめシートに埋める](#必要事項をまとめシートに埋める)
-2. [回帰分析でレイテンシ算出](#回帰分析でレイテンシ算出)
+1. [Fill out *summary* sheet with the required information](#Fill-out-*summary*-sheet-with-the-required-information)
+2. [Latency calculation by regression analysis](#Latency-calculation-by-regression-analysis)
 
 #### Fill out *summary* sheet with the required information
 
@@ -93,50 +93,52 @@ The items to be entered are as follows:
 In the regression analysis sheet, calculate the latency of each variable using the solver function.
 In this file, the latency is calculated by the least-squares method for the actual machine execution cycle and the estimation cycle.
 
-回帰分析は「データ」→「ソルバー」を選択し、各パラメータを以下のように設定して行います。
+Regression analysis is performed by selecting 「Data」→「Solver」 and setting each parameter as follows:
 
 ```bash
-・目的セルの設定：AA2 (灰色のセル)
-・目標値：最小値
-・変数セル：C2～X2 (緑、赤のセル)
-・制約条件：
-  - 2行目(緑、赤のセル)が非負
-  - AA列(実機実行サイクルと見積りサイクルの差の2乗)が±0.2以内
-・制約のない変数を非負数にする：☑
-・解決方法の選択：GRG 非線形
+・Set Objective：AA2 (cell of gray)
+・To：Min
+・By Changing Variable Cells：C2～X2 (cell of green and red)
+・Subject to the Constraints：
+  - Row 2(cell of green and red) is Non-Negative
+  - Colimn AA(The square of the difference between the actual execution cycle and the estimation cycle) is within ±0.2
+・Make Unconstrained Variables Non-Negative：☑
+・Select a Solving Method：GRG Nonlinear
 ```
 
-2行目の緑色のセルに計算されたレイテンシが出力されます。
-制約条件を満たす解が見つからなくても、最適なレイテンシが得られます。
+The calculated latency will be output in the green cell of the second row.
+Even if no solution is found that satisfies the constraints, the optimal latency will be obtained.
 
-### csvに変換
+### Convert to *csv*
 
-レイテンシをSHIMに挿入するツールで使えるcsvファイルに変換します。手順は以下の通りです。
+Convert the latency to a csv file that can be used by the tool to insert the latency into SHIM. 
+The procedure is as follows:
 
-1. [マクロを実行して *csv* ファイルを生成](#マクロを実行してcsvファイルを生成)
-2. [そのファイルを *csv* 形式で保存](#そのファイルをcsv形式で保存)
-3. [レイテンシ挿入ツールの規則に沿うように変換](#レイテンシ挿入ツールの規則に沿うように変換)
+1. [Run the macro to generate a *csv* file](#Run-the-macro-to-generate-a-*csv*file)
+2. [Save the file in *csv* format](#Save-the-file-in-*csv*-format)
+3. [Convert to follow the rules of the Latency Insertion Tool](#Convert-to-follow-the-rules-of-the-Latency-Insertion-Tool.)
 
-#### マクロを実行して*csv*ファイルを生成
+#### Run the macro to generate a *csv* file
 
-先の工程で使った [**calc.xlsm**](/calc.xlsm) から命令名とレイテンシのセルのみを抜き出します。
-「表示」→「マクロ」の「*outputCSV*」を実行してください。緑色と青色のセルのみの新しいファイルが生成されれば成功です。
+Extract only the instruction name and latency cells from [**calc.xlsm**](/calc.xlsm) used in the previous step.
+Click 「View」→「Macro」→「*outputCSV*」. 
+If a new file with only green and blue cells is generated, you have succeeded.
 
-#### そのファイルを*csv*形式で保存
+#### Save the file in *csv* format
 
-そのファイルを「名前を付けて保存」で保存します。以下の3点に注意してください。
+Save the file with 「Save As」. Please note the following three points.
 
-+ ファイルの種類をCSVにする
-+ ファイル名を「**input.csv**」にする
-+ [latency/*trans*/*inst*](trans/inst) 内に保存
++ Set the file type to CSV
++ Change the file name to 「**input.csv**」
++ Save in [latency/*trans*/*inst*](trans/inst)
 
 ![csvファイルとして保存](../images/save.bmp)
 
-#### レイテンシ挿入ツールの規則に沿うように変換
+#### Convert to follow the rules of the Latency Insertion Tool
 
-**transcsv.py**を動かして先ほど作成した *csv* ファイルをレイテンシ挿入ツールに対応した形に変換します。
-*trans* ディレクトリ内で以下のコマンドを実行することで、「**output.csv**」が出力されます。
+Run **transcsv.py** to convert the *csv* file you just created into a form compatible with the Latency Insertion Tool.
+By executing the following command in the *trans* directory, 「**output.csv**」 will be output.
 
 `python transcsv.py`
 
-出力されるファイル(**output.csv**)の例は[**sample.csv**](./trans/sample.csv)をご確認ください。
+For an example of the output file(**output.csv**), see [**sample.csv**](. /trans/sample.csv).

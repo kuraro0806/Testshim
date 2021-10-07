@@ -16,6 +16,7 @@
       - [Run the macro to generate a *csv* file](#run-the-macro-to-generate-a-csv-file)
       - [Save the file in *csv* format](#save-the-file-in-csv-format)
       - [Convert to follow the rules of the Latency Insertion Tool](#convert-to-follow-the-rules-of-the-latency-insertion-tool)
+      - [Insert into  *SHIM*.](#insert-into--shim)
 
 ## Description
 
@@ -139,3 +140,42 @@ By executing the following command in the *trans* directory, 「**output.csv**�
 `python transcsv.py`
 
 For an example of the output file(**output.csv**), see [**sample.csv**](./trans/sample.csv).
+
+#### Insert into  *SHIM*.
+
+We can insert latency into *SHIM* with the following command.
+
+```console
+java -classpath ./AmaltheaTools.jar Performance2SHIM [options...] [ShimFile]
+```
+
+|Option　　                                            |Description                                                                             |
+|---                                                   |---                                                                                     |
+|\-F,\-func\[tionalunitset\],\-\-func\[tionalunitset\] |Set the processing target to the _SHIM2\.0_ file that contains only _FunctionalUnitSet_ |
+|\-N,\-new,\-\-new                                     |Output a new _SHIM2\.0_ file that contains only _FunctionalUnitSet_                     |
+|\-o,\-out\[put\],\-\-out\[put\]                       |Specify the _SHIM2\.0_ file for output                                                  |
+|\-d,\-dir\[ectory\],\-\-dir\[ectory\]                 |Specify the output directory                                                            |
+|\-s,\-suffix,\-\-suffix                               |Specify the suffix for output files                                                     |
+|\-B,\-bit\[width\],\-\-bit\[width\]                   |Specify default values for _inputBitWidth_ and _outputBitWidth_                         |
+|\-I,\-inbit\[width\],\-\-inbit\[width\]               |Specify the default value for _inputBitWidth_                                           |
+|\-O,\-outbit\[width\],\-\-outbit\[width\]             |Specify the default value for _outputBitWidth_.                                         |
+|\-c,\-csv\[file\],\-\-csv\[file\]                     |Specify the _CSV_ file for performance information                                      |
+|\-i,\-in\[put\],\-\-in\[put\]                         |Specify the _SHIM2\.0_ file to input                                                    |
+|\-m,\-master\[component\],\-\-master\[component\]     |Specify the _ID_ of _MasterComponent_                                                   |
+|\-Y,\-yaml,\-\-yaml                                   |Specify the _YAML_ file that describes the process                                      |
+
+
+【Example】
+Case 1：
+If you want to insert the latency of the **output.csv** generated for the Master Component whose *Master Component ID* is (*MD~*) in **shim20.xml** and name the file as *shim20_output.xml*
+
+```console
+java -classpath ./AmaltheaTools.jar Performance2SHIM -o shim20_output.xml -c output.csv -m (MD~) shim20.xml
+```
+
+Case 2：
+If you want to generate a new *SHIM* and shim20 as shim20_new.xml based on the latency of **output.csv**
+
+```console
+java -classpath ././AmaltheaTools.jar Performance2SHIM -N shim20 -o shim20_new.xml -c output.csv
+```

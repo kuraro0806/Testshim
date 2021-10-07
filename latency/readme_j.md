@@ -136,3 +136,53 @@
 `python transcsv.py`
 
 出力されるファイル(**output.csv**)の例は[**sample.csv**](./trans/sample.csv)をご確認ください。
+
+### *SHIM*への挿入
+
+**output.csv**を*SHIM*に挿入します。
+*Java*の環境はバージョン8以降を想定しています。
+
+#### 準備
+
+以下のファイルを準備してください。すべて[*trans*](./trans)内に配置してください。
+
++ [**AmaltheaTools.jar**][./trans/AmaltheaTools.jar]
++ **output.csv**(先ほど ./trans/ に生成したもの)
++ **SHIM.xml**
+
+#### *SHIM*に挿入
+
+以下のコマンドで*SHIM*にレイテンシが挿入できます。
+
+```console
+java -classpath ./AmaltheaTools.jar Performance2SHIM [options...] [ShimFile]
+```
+
+|オプション                                            |説明                                                                  |
+|---                                                   |---                                                                   |
+|\-F,\-func\[tionalunitset\],\-\-func\[tionalunitset\] |処理対象を _FunctionalUnitSet_ のみを含む _SHIM2\.0_ のファイルにする |
+|\-N,\-new,\-\-new                                     |新たに _FunctionalUnitSet_ のみを含む _SHIM2\.0_ のファイルを出力     |
+|\-o,\-out\[put\],\-\-out\[put\]                       |出力する _SHIM2\.0_ ファイルの指定                                    |
+|\-d,\-dir\[ectory\],\-\-dir\[ectory\]                 |出力ディレクトリの指定                                                |
+|\-s,\-suffix,\-\-suffix                               |出力ファイルのサフィックスの指定                                      |
+|\-B,\-bit\[width\],\-\-bit\[width\]                   |_inputBitWidth_, _outputBitWidth_ のデフォルト値の指定                |
+|\-I,\-inbit\[width\],\-\-inbit\[width\]               |_inputBitWidth_ のデフォルト値の指定                                  |
+|\-O,\-outbit\[width\],\-\-outbit\[width\]             |_outputBitWidth_ のデフォルト値の指定                                 |
+|\-c,\-csv\[file\],\-\-csv\[file\]                     |性能情報の _CSV_ ファイルの指定                                       |
+|\-i,\-in\[put\],\-\-in\[put\]                         |入力する _SHIM2\.0_ ファイルの指定                                    |
+|\-m,\-master\[component\],\-\-master\[component\]     |_MasterComponent_ の _ID_ の指定                                      |
+|\-Y,\-yaml,\-\-yaml                                   |処理記述した _YAML_ ファイルの指定                                    |
+
+【例】
+
+**shim20.xml**内の*Master Component ID*が(*MD~*)のMaster Componentに生成した**output.csv**のレイテンシを挿入し、そのファイル名を*shim20_output.xml*としたい場合：
+
+```console
+java -classpath ./AmaltheaTools.jar Performance2SHIM -o shim20_output.xml -c output.csv -m (MD~) shim20.xml
+```
+
+**output.csv**のレイテンシを基に新たな*SHIM*、shim20をshim20_new.xmlとして生成したい場合：
+
+```console
+java -classpath ././AmaltheaTools.jar Performance2SHIM -N shim20 -o shim20_new.xml -c output.csv
+```

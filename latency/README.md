@@ -166,7 +166,9 @@ java -classpath ./AmaltheaTools.jar Performance2SHIM [options...] [ShimFile]
 
 
 【Example】
+
 Case 1：
+
 If you want to insert the latency of the **output.csv** generated for the Master Component whose *Master Component ID* is (*MD~*) in **shim20.xml** and name the file as *shim20_output.xml*
 
 ```console
@@ -174,6 +176,7 @@ java -classpath ./AmaltheaTools.jar Performance2SHIM -o shim20_output.xml -c out
 ```
 
 Case 2：
+
 If you want to generate a new *SHIM* and shim20 as shim20_new.xml based on the latency of **output.csv**
 
 ```console

@@ -136,7 +136,20 @@ By executing the following command in the *trans* directory, "**output.csv**" wi
 
 For an example of the output file(**output.csv**), see [**sample.csv**](./trans/sample.csv).
 
-#### Insert into  *SHIM*.
+### Insert into *SHIM*
+
+Insert **output.csv** into *SHIM*.
+*Java* environment is assumed to be version 8 or later.
+
+#### Preparation
+
+Prepare the following files. Place them all in [*trans*](. /trans).
+
++ [**AmaltheaTools.jar**](. /trans/AmaltheaTools.jar)
++ **output.csv** (which you just placed in [./trans/](. /trans))
++ **SHIM.xml**.\
+
+#### Insertiton
 
 We can insert latency into *SHIM* with the following command.
 

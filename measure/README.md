@@ -6,7 +6,7 @@
     - [Tools](#tools)
     - [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
       - [Run **run.sh**](#run-runsh)
-      - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#Make-sure-that-c\_src\_Macro-directory-is-created-in-insertMacro\/c\_src)
+      - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#Make-sure-that-*c_src_Macro*-directory-is-created-in-*insertMacro/c_src*)
     - [Cross-compile the programs in *c_src_Macro*.](#cross-compile-the-programs-in-csrcmacro)
   - [Run programs on the target device and get execution cycle](#run-programs-on-the-target-device-and-get-execution-cycle)
     - [Note](#note)

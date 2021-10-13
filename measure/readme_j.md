@@ -61,7 +61,7 @@
 挿入する手順は以下の通りです。
 
   1. [**run.sh**を動かす](#runshを動かす)
-  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacrocsrc-内に-csrcmacro-というディレクトリができているのを確認する)
+  2. [*insertMacro/c_src* 内に *c_src_Macro* というディレクトリができているのを確認する](#insertmacroc_src-内に-c_src_macro-というディレクトリができているのを確認する)
 
 #### **run.sh**を動かす
 

@@ -1,33 +1,33 @@
 # Measure Execution Cycles 
-- [Measure Execution Cycles](#measure-execution-cycles)
+
   - [Description](#description)
     - [Execution Environment](#execution-environment)
   - [Preparation](#preparation)
     - [Tools](#tools)
     - [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
       - [Run **run.sh**](#run-runsh)
-      - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-c_src_macro-directory-is-created-in-insertmacroc_src)
-      - [Cross-compile the programs in *c_src_Macro*.](#cross-compile-the-programs-in-c_src_macro)
-  - [Run programs on a actual device and get execution cycle](#run-programs-on-a-actual-device-and-get-execution-cycle)
+      - [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-csrcmacro-directory-is-created-in-insertmacrocsrc)
+    - [Cross-compile the programs in *c_src_Macro*.](#cross-compile-the-programs-in-csrcmacro)
+  - [Run programs on the target device and get execution cycle](#run-programs-on-the-target-device-and-get-execution-cycle)
     - [Note](#note)
       - [Startup *PMU*](#startup-pmu)
       - [Fix operating frequency](#fix-operating-frequency)
-      - [How to output the results](#how-to-output-the-results)
+      - [Output results in csv](#output-results-in-csv)
         - [Explanation of each column](#explanation-of-each-column)
 
 ## Description
 
-This directory provides functions to cross-compile the measurement program for the actual device and acquire the execution cycles.
+This directory provides functions to cross-compile the measurement programs for the target device and acquire the execution cycles.
 
 The procedure is as follows.
 
-+ [Insert macros to get execution cycle](#Insert-macros-to-get-execution-cycle)
-+ Cross-compile to run on a actual device
-+ [Run programs on a actual device and get execution cycle](#Run-programs-on-a-actual-device-and-get-execution-cycle)
++ [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
++ [Cross-compile to run on the target device](#cross-compile-the-programs-in-csrcmacro)
++ [Run programs on the target device and get execution cycle](#run-programs-on-the-target-device-and-get-execution-cycle)
 
 ### Execution Environment
 
-We have confirmed that the programs runs on the following platform.
+We have confirmed that the programs run on the following platform.
 
 + Environment
   + *Ubuntu ver.16.04LTS*
@@ -60,10 +60,8 @@ The files to be prepared are as follows:
 
 The procedure to insert is as follows:
 
-  1. [Run **run.sh**](#Run-runsh)
-  2. [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#[Make-sure-that-*c_src_Macro*-directory-is-created-in-*insertMacro/c_src*)
-  3. [Cross-compile the programs in *c_src_Macro*](#Cross-compile-the-programs-in-*c_src_Macro*)
-
+  1. [Run **run.sh**](#run-runsh)
+  2. [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-csrcmacro-directory-is-created-in-insertmacrocsrc)
 
 #### Run **run.sh**
 
@@ -73,45 +71,45 @@ The command to run is as follows:
 
 #### Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*
 
-Make sure that *c_src_Macro* is created in *c_src*, and that there is a measurement programs in that directory with the macro inserted.
+Make sure that *c_src_Macro* is created in *c_src*, and that there are measurement programs in that directory with the macro inserted.
 
-※ The insertion of the macro does not work because there is more than one *return* in **GaussianElimination.c**. Deleting the macro in lines 97 to 122 will solve the problem.
+- For **GaussianElimination.c**, the insertion of the macro does not work because there are more than one *return*. Deleting the macro in lines 97 to 122 will solve the problem.
 
-#### Cross-compile the programs in *c_src_Macro*. 
+### Cross-compile the programs in *c_src_Macro*. 
 
-Cross-compile the programs so that it can run on the target hardware.
+Cross-compile the programs so that they can run on the target hardware.
 
-## Run programs on a actual device and get execution cycle
+## Run programs on the target device and get execution cycle
 
 Move the compiled executable files to the target hardware via USB memory, and execute them.
 
 ### Note
 Please pay attention to the following three points when doing this.
 
-1. [Startup *PMU*](#Startup-PMU)
-2. [Fix operating frequency](#Fix-operating-frequency)
-3. [How to output the results](#How-to-output-the-results)
+1. [Startup *PMU*](#startup-pmu)
+2. [Fix operating frequency](#fix-operating-frequency)
+3. [Output results in csv](#output-results-in-csv)
 
 #### Startup *PMU*
 
-Load the three kernel modules(***.ko*) in [*PMU_module*](PMU_module) with the following command.
+Load the three kernel modules(***.ko*) in [*PMU_module*](pmu_module) with the following command.
 
 `insmod (kernel module)`
 
 #### Fix operating frequency
 
-Move **cpusetup.sh** in [*PMU_module*](PMU_module) with the following command.
+Move **cpusetup.sh** in [*PMU_module*](pmu_module) with the following command.
 
 `./cpusetup3.sh`
 
-#### How to output the results
+#### Output results in csv
 
-Please output the execution result to *csv* file as shown in the following example.
-(*BubbleSort* is file compiled from **BubbleSort.c**.)
+Output the execution result to *csv* file as shown in the following example.
+(*BubbleSort* is the file compiled from **BubbleSort.c**.)
 
 `./BubbleSort > res_BubbleSort.csv`
 
-Make sure that the *csv* file outputs the following results.
+Make sure that the *csv* file contains the following results.
 
 ```bash
 L1I-Refill,,,,L1D-Refil,,,,L1D-Access,,,,L1I-Access,,,,L2D-Access,,,,L2D-Refill,,,,
@@ -134,13 +132,12 @@ L2missrate,0.367183
 
 ##### Explanation of each column
 
-They are getting *Refill* and *Access* for *Iteration* and *L1I/L1D/L2D* respectively.
-*PMU* is used to get the number of events above. *Total、Start、End、lap* are expressed as follows.
+The numbers of *Refill*s and *Access*es for *L1I/L1D/L2D* respectively in all *Iteration*s are obtained from *PMU*. *Total、Start、End、lap* are described as follows.
 
 |Name of column|Description|
 |---|---|
-|Start|Number of event counters when starting the measurement program|
-|End|Number of event counters at the end of the measurement program|
+|Start|Event counter value when starting measurement program|
+|End|Event counter value at the end of measurement program|
 |lap|*lap = End - Start*|
 |Total|Sum of *lap*|
 
@@ -148,9 +145,11 @@ The final output parameters are as follows.
 
 |Name of parameters|Description of parameters|
 |---|---|
-|TotalTime|Sum of the execution cycles executed *Itration* times|
-|Iteration|Number of times to execute the program defined by the macro|
+|TotalTime|Sum of the execution cycles in all *Itration*s|
+|Iteration|Number of executions of program defined by the macro|
 |exec count|Average number of execution cycles (*TotalTime / Iteration*)|
 |L1access|Average number of L1 accesses|
 |L1missrate|L1 cache miss rate (*L1-Rifill / L1-Access*)|
 |L2missrate|L2 cache miss rate (*L2-Refill / L2-Access*)|
+
+Note: The misrates are extimated by (# of refilles / # of accessees) in this measurement due to PMU specs.

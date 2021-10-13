@@ -93,13 +93,13 @@ Please pay attention to the following three points when doing this.
 
 #### Startup *PMU*
 
-Load the three kernel modules(***.ko*) in [*PMU_module*](pmu_module) with the following command.
+Load the three kernel modules(***.ko*) in [*PMU_module*](./PMU_module) with the following command.
 
 `insmod (kernel module)`
 
 #### Fix operating frequency
 
-Move **cpusetup.sh** in [*PMU_module*](pmu_module) with the following command.
+Move **cpusetup.sh** in [*PMU_module*](./PMU_module) with the following command.
 
 `./cpusetup3.sh`
 

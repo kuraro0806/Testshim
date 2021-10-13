@@ -18,7 +18,7 @@ Follow the steps below to complete the process.
 
 Execute the measurement programs on the target device and output the execution cycles and memory access counts.
 
-This function is available in the [*measure*](./mesure) directory.
+This function is available in the [*measure*](./measure) directory.
 
 ## Latency Insertion
 

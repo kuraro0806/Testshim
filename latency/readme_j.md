@@ -142,8 +142,8 @@
 
 以下のファイルを準備してください。すべて[*trans*](./trans)内に配置してください。
 
-+ [**AmaltheaTools.jar**][./trans/AmaltheaTools.jar]
-+ **output.csv**(先ほど ./trans/ に生成したもの)
++ [**AmaltheaTools.jar**](./trans/AmaltheaTools.jar)
++ **output.csv**(先ほど [./trans/](./trans) に生成したもの)
 + **SHIM.xml**
 
 #### *SHIM*に挿入

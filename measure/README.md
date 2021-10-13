@@ -23,7 +23,7 @@ This directory provides functions to cross-compile the measurement programs for 
 The procedure is as follows.
 
 + [Insert macros to get execution cycle](#insert-macros-to-get-execution-cycle)
-+ [Cross-compile to run on the target device](#cross-compile-the-programs-in-csrcmacro)
++ [Cross-compile to run on the target device](#cross-compile-the-programs-in-c_src_macro)
 + [Run programs on the target device and get execution cycle](#run-programs-on-the-target-device-and-get-execution-cycle)
 
 ### Execution Environment

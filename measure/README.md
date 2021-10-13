@@ -62,7 +62,7 @@ The files to be prepared are as follows:
 The procedure to insert is as follows:
 
   1. [Run **run.sh**](#run-runsh)
-  2. [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-csrcmacro-directory-is-created-in-insertmacrocsrc)
+  2. [Make sure that *c_src_Macro* directory is created in *insertMacro/c_src*](#make-sure-that-c_src_macro-directory-is-created-in-insertmacroc_src)
 
 #### Run **run.sh**
 

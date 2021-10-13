@@ -143,11 +143,11 @@ Insert **output.csv** into *SHIM*.
 
 #### Preparation
 
-Prepare the following files. Place them all in [*trans*](. /trans).
+Prepare the following files. Place them all in [*trans*](./trans).
 
-+ [**AmaltheaTools.jar**](. /trans/AmaltheaTools.jar)
++ [**AmaltheaTools.jar**](./trans/AmaltheaTools.jar)
 + **output.csv** (which you just placed in [./trans/](. /trans))
-+ **SHIM.xml**.\
++ **SHIM.xml**
 
 #### Insertiton
 

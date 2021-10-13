@@ -32,7 +32,7 @@ The following tool is required to run the programs.
 
 The files to prepare are as follows:
 
-+ *csv* files obtained by [mesure](../mesure).
++ *csv* files obtained by [measure](../measure).
 
 ### Exclude outliers
 

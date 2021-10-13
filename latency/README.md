@@ -185,8 +185,8 @@ java -classpath ./AmaltheaTools.jar Performance2SHIM -o shim20_output.xml -c out
 
 Case 2：
 
-If you want to generate a new *SHIM* and *shim20* as **shim20_new.xml** based on the latency of **output.csv**
+If you want to generate a new *SHIM* and *NewShim20* as **shim20_new.xml** based on the latency of **output.csv**
 
 ```console
-java -classpath ./AmaltheaTools.jar Performance2SHIM -N shim20 -o shim20_new.xml -c output.csv
+java -classpath ./AmaltheaTools.jar Performance2SHIM -N NewShim20 -o shim20_new.xml -c output.csv
 ```

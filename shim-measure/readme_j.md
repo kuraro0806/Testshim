@@ -6,7 +6,7 @@
 
 ## はじめに
 
-本ディレクトリ *openshim* では、ハードウェア抽象化記述である *SHIM (Software-Hardware Interface for Multi-many-core)* の遅延値(*latency*)を取り扱うための機能を提供します。
+本ディレクトリでは、ハードウェア抽象化記述である *SHIM (Software-Hardware Interface for Multi-many-core)* の遅延値(*latency*)を取り扱うための機能を提供します。
 ここでは遅延値が挿入されていないSHIMの存在を仮定しています。まだ作成していない場合は[*SHIM 2.0 Editor*](https://github.com/openshim/shim2)で*SHIM XML*を作成してください。
 
 遅延値の計測、SHIM XMLへの遅延値の挿入は以下の手順で行ってください。
